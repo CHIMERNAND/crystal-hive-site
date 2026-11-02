@@ -1,84 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crystal Hive — Tilt-to-roll crystal runner</title>
-<meta name="description" content="Tilt your phone, roll a glowing ball down living crystal. Offline arcade. No ads.">
-<meta property="og:title" content="Crystal Hive">
-<meta property="og:description" content="Tilt-to-roll crystal runner. Offline. No ads.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://clarkestudios.com/crystal-hive-site/">
-<meta property="og:image" content="https://clarkestudios.com/crystal-hive-site/og.png">
-<meta name="twitter:card" content="summary_large_image">
+<title>Crystal Hive — Tilt to roll · Clarke Studios</title>
+<meta name="description" content="Crystal Hive is a tilt-to-roll iPhone game from Clarke Studios. Tilt your phone, roll a glowing ball through living crystal and outrun the hive. Offline, no ads.">
 <link rel="canonical" href="https://clarkestudios.com/crystal-hive-site/">
+<meta property="og:title" content="Crystal Hive — Tilt to roll">
+<meta property="og:description" content="Tilt your phone, roll a glowing ball through living crystal and outrun the hive. Offline, no ads.">
+<meta property="og:image" content="https://clarkestudios.com/crystal-hive-site/og.png">
+<meta property="og:url" content="https://clarkestudios.com/crystal-hive-site/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root { color-scheme: dark; --bg:#0d0820; --ink:#e9e3ff; --mute:#a89bc8; --line:#2a1f45; --burn:#b48cff; --you:#7ee0c3; }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.5 system-ui,sans-serif; }
-  main { max-width:40rem; margin:0 auto; padding:32px 20px 64px; }
-  h1 { font-weight:600; letter-spacing:0.02em; font-size:1.8rem; margin:0 0 4px; }
-  h2 { font-weight:600; font-size:1.25rem; margin:2.2rem 0 0.6rem; color:var(--you); }
-  .sub { color:var(--mute); margin-top:0; }
-  a { color:var(--burn); }
-  nav a { margin-right:1rem; }
-  .cta { display:inline-block; margin:0.4rem 0.6rem 0.4rem 0; padding:0.55rem 0.9rem; border:1px solid var(--line); border-radius:6px; text-decoration:none; color:var(--ink); }
-  .cta.primary { border-color:var(--burn); color:var(--burn); }
-  .note { color:var(--mute); font-size:0.95rem; }
+@font-face{font-family:Fraunces;src:url(assets/fonts/fraunces.woff2) format("woff2");font-weight:300 900;font-display:swap}
+@font-face{font-family:Fraunces;src:url(assets/fonts/fraunces-italic.woff2) format("woff2");font-style:italic;font-weight:300 900;font-display:swap}
+@font-face{font-family:"Instrument Sans";src:url(assets/fonts/instrument-sans.woff2) format("woff2");font-weight:400 700;font-display:swap}
+:root{color-scheme:dark;--bg:#0d0820;--bg2:#160e30;--ink:#ece6ff;--mute:#a99dcb;--line:#2c2150;--violet:#b48cff;--glow:#ffe2a8;--mint:#7ee0c3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--violet);text-underline-offset:.18em}
+a:hover{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:4px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4rem}
+.studio{color:var(--mute);text-decoration:none;font-size:.9rem;white-space:nowrap}
+.studio b{font:600 1rem Fraunces,serif;color:var(--ink)}
+.studio i{font-family:Fraunces,serif;color:var(--violet)}
+nav{display:flex;gap:1.4rem;font-size:.92rem}
+nav a{color:var(--mute);text-decoration:none;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding-top:4.5rem;padding-bottom:4rem}
+.title{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.4rem}
+.title img{width:84px;height:84px;border-radius:20px;box-shadow:0 0 0 1px var(--line),0 10px 40px -10px #7a4dff88}
+h1{font:500 clamp(2.6rem,6vw,4rem)/1 Fraunces,serif;margin:0;letter-spacing:-.01em}
+.kind{color:var(--mute);font-size:.92rem;margin-top:.35rem}
+.lede{font:italic 400 1.45rem/1.4 Fraunces,serif;color:var(--glow);margin:0 0 1rem;max-width:30ch}
+.hero p{max-width:36rem;color:#d6cdf2}
+.status{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;color:var(--mint);margin-top:.6rem}
+.status:before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+.shots{display:flex;gap:1rem;justify-content:center;min-width:0}
+.hero>div{min-width:0}
+.shots img{width:31%;max-width:190px;height:auto;min-width:0;border-radius:18px;border:1px solid var(--line);box-shadow:0 20px 50px -20px #000}
+.shots img:nth-child(2){transform:translateY(-1.6rem)}
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2{font:500 2rem/1.15 Fraunces,serif;margin:0 0 1.5rem}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.mode{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+.mode h3{font:600 1.2rem Fraunces,serif;margin:0 0 .4rem;color:var(--ink)}
+.mode p{margin:0;color:var(--mute);font-size:.98rem}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2rem;padding:0;list-style:none}
+.facts li{border-top:1px solid var(--line);padding-top:.7rem;color:var(--mute);font-size:.95rem}
+.facts b{display:block;color:var(--ink);font-weight:600}
+.cols{display:grid;grid-template-columns:14rem 1fr;gap:2.5rem}
+.cols h2{margin:0}
+.prose h3{font:600 1.1rem Fraunces,serif;margin:1.6rem 0 .3rem}
+.prose h3:first-child{margin-top:0}
+.prose p{margin:0 0 .8rem;color:#d6cdf2;max-width:42rem}
+.updated{color:var(--mute);font-size:.9rem}
+.mail{font:500 1.35rem Fraunces,serif}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--mute);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:2.5rem;padding-top:3rem}.modes{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr;gap:1rem}}
+@media (max-width:480px){nav{gap:1rem;font-size:.85rem}nav .opt{display:none}.title img{width:68px;height:68px}.facts{grid-template-columns:1fr}.lede{font-size:1.25rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<header class="top"><div class="wrap">
+  <a class="studio" href="https://clarkestudios.com/"><b>Clarke</b> <i>Studios</i></a>
+  <nav><a class="opt" href="#play">The game</a><a href="#privacy">Privacy</a><a href="#support">Support</a></nav>
+</div></header>
 <main>
-  <h1>Crystal Hive</h1>
-  <p class="sub">Tilt-to-roll crystal runner. Offline arcade. No ads.</p>
-  <nav>
-    <a href="#play">Play</a>
-    <a href="#beta">Beta</a>
-    <a href="#privacy">Privacy</a>
-    <a href="#support">Support</a>
-  </nav>
-  <p>
-    <a class="cta primary" href="#play">Web demo</a>
-    <a class="cta" href="#beta">TestFlight</a>
-  </p>
+<div class="wrap hero" id="play">
+  <div>
+    <div class="title"><img src="assets/img/icon.webp" alt="Crystal Hive app icon" width="84" height="84"><div><h1>Crystal Hive</h1><div class="kind">Arcade · iPhone</div></div></div>
+    <p class="lede">Tilt the world. Outrun the hive.</p>
+    <p>Tilt your phone to roll a glowing ball down tracks of living crystal. Grab shards to bloom bridges and shatter walls, and keep moving, because the hive is growing behind you. If you fall, you're back on the track in under a second.</p>
+    <span class="status">In development, coming to TestFlight</span>
+  </div>
+  <div class="shots">
+    <img src="assets/img/amethyst.webp" alt="Rolling down a violet crystal track in the Amethyst biome" width="540" height="1174">
+    <img src="assets/img/obsidian.webp" alt="A dark Obsidian track lit by a single beam" width="540" height="1174">
+    <img src="assets/img/geodes.webp" alt="A pale stepped track in the Geodes biome" width="540" height="1174">
+  </div>
+</div>
 
-  <h2 id="play">Web demo</h2>
-  <p class="note">The Vite build plays in a browser (<code>npm run dev</code> / <code>npm run build</code>). Host a static <code>dist/</code> here after Drew approves publishing the web build. Until then:</p>
-  <p><a class="cta" href="https://github.com/CHIMERNAND/monorepo/tree/main/projects/tiltopia/ideas/crystal-hive">Open Crystal Hive in the monorepo</a></p>
+<section><div class="wrap">
+  <h2>Three ways to roll</h2>
+  <div class="modes">
+    <div class="mode"><h3>Descent</h3><p>Hand-tuned biomes, each with its own hazards and light: Amethyst, Bismuth, Obsidian, Geodes and the Apex.</p></div>
+    <div class="mode"><h3>Daily Hive</h3><p>A new course every day, the same for every player.</p></div>
+    <div class="mode"><h3>Endless Bloom</h3><p>A crystal run that never ends and keeps getting faster.</p></div>
+  </div>
+  <ul class="facts">
+    <li><b>Controls</b>Tilt your phone, or drag with a thumb</li>
+    <li><b>No assists</b>What you tilt is what you roll</li>
+    <li><b>Price</b>Free to start. Full Hive is a one-time unlock</li>
+    <li><b>Offline</b>No ads, no account, no internet needed</li>
+  </ul>
+</div></section>
 
-  <h2 id="beta">TestFlight</h2>
-  <p>Public link placeholder — Drew creates the public TestFlight link in App Store Connect after the first upload, then replace this paragraph with the URL.</p>
-  <p class="note">ASC app record must exist first (bundle <code>com.chimernand.crystalhive</code>, SKU <code>crystalhive</code>).</p>
+<section id="privacy"><div class="wrap cols">
+  <h2>Privacy</h2>
+  <div class="prose">
+    <p class="updated">Last updated November 2026.</p>
+    <h3>What we collect</h3>
+    <p>Nothing. Crystal Hive has no accounts, no ads and no analytics. It doesn't collect your name, email, contacts, location, photos or advertising identifier, and nothing about how you play leaves your phone.</p>
+    <h3>Motion</h3>
+    <p>The game reads your phone's motion sensors only to steer the ball. That data stays on the device.</p>
+    <h3>Purchases</h3>
+    <p>In-app purchases are handled by Apple. We never see your payment details.</p>
+    <h3>Replay clips</h3>
+    <p>If you choose to save a replay clip, the game writes it to your Photos library. It never reads your photos.</p>
+    <h3>Children</h3>
+    <p>The game doesn't collect personal information from anyone, including children.</p>
+    <h3>Changes</h3>
+    <p>If a future version adds anything that collects data, such as Game Center leaderboards or optional analytics you can turn off, we'll update this page and the App Store privacy details first.</p>
+  </div>
+</div></section>
 
-  <h2 id="privacy">Privacy</h2>
-
-<p>Last updated: October 2026.</p>
-<h2>What we collect</h2>
-<p>When analytics is enabled, Crystal Hive sends anonymous gameplay events (for example, levels started and finished) and your device model to GameAnalytics. This data is not linked to your identity and is not used to track you across other apps or websites. You can turn analytics off at any time in the in-game Settings.</p>
-<h2>What we do not collect</h2>
-<p>There are no accounts. We do not collect your name, email, contact list, location, photos or advertising identifier. Motion sensor data is used on your device only, to steer the ball.</p>
-<h2>Purchases</h2>
-<p>In-app purchases are processed by Apple. We never see your payment details.</p>
-<h2>Game Center</h2>
-<p>Leaderboards use Apple Game Center. Your scores and display name are handled by Apple under Apple's privacy policy.</p>
-<h2>Photos</h2>
-<p>If you choose to save a replay clip, it is written to your Photos library. The app does not read your photos.</p>
-<h2>Children</h2>
-<p>The game does not knowingly collect personal information from anyone.</p>
-<h2>Contact</h2>
-<p>Questions: <a href="mailto:support@clarkestudios.com">support@clarkestudios.com</a></p>
-
-
-  <h2 id="support">Support</h2>
-
-<p>Need help? Email <a href="mailto:support@clarkestudios.com">support@clarkestudios.com</a> and include your iPhone model and iOS version.</p>
-
-<h2>Common questions</h2>
-<p><strong>The ball does not respond to tilt.</strong> Allow motion access when asked. If you declined, close the app, then re-open it and tap to start; or check Settings &gt; Crystal Hive.</p>
-<p><strong>Restore purchases.</strong> Open Settings in the game and tap Restore Purchases. Purchases are tied to your Apple ID.</p>
-<p><strong>Turn off analytics.</strong> Settings in the game has an analytics toggle.</p>
-<p><a href="privacy.html">Privacy policy</a></p>
-  <p class="note">Studio: <a href="https://clarkestudios.com/">Clarke Studios</a></p>
+<section id="support"><div class="wrap cols">
+  <h2>Support</h2>
+  <div class="prose">
+    <p>Email <a class="mail" href="mailto:support@clarkestudios.com">support@clarkestudios.com</a></p>
+    <p>Tell us your iPhone model, your iOS version and what happened. A real person reads every message, usually within two business days.</p>
+    <h3>The ball doesn't respond to tilt</h3>
+    <p>Allow motion access when the game asks. If you said no, open the game's settings and switch to touch drag, or allow motion again in the iPhone Settings app.</p>
+    <h3>The ball drifts when I hold my phone still</h3>
+    <p>Tap the screen with two fingers to set "level" to however you're holding your phone.</p>
+    <h3>Restoring a purchase</h3>
+    <p>On the main menu, open Full Hive or Cores and tap Restore Purchases. Purchases belong to your Apple ID, so they carry over to a new phone.</p>
+  </div>
+</div></section>
 </main>
+<footer><div class="wrap">
+  <span>© 2026 <a href="https://clarkestudios.com/">Clarke Studios</a></span>
+  <a href="mailto:support@clarkestudios.com">support@clarkestudios.com</a>
+</div></footer>
 </body>
 </html>
